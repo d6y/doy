@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <style type="text/css" title="AppleStyle">
+        @import "doy.css";
+		@import "SafariStyle.css";
+    </style>
+    <script type="text/javascript" src="AppleClasses/AppleAnimator.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/AppleButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/AppleInfoButton.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/AppleScrollbar.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/AppleScrollArea.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/AppleSlider.js" charset="utf-8"></script>
+    <script type="text/javascript" src="AppleClasses/ApplePrivate.js" charset="utf-8"></script>
+    <script type="text/javascript" src="doy.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Listing.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Movie.js" charset="utf-8"></script>
+    <script type="text/javascript" src="ListingsParser.js" charset="utf-8"></script>
+    <script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
+</head>
+<body onload="load();">
+	<div id="front">
+		<img id="frontImg" class="apple-id" src="Images/front.png" alt="" apple-style="CYTheme: 0; CYBorder: 0; CYImageShape: 0; CYTopColor: 1.0,1.0,1.0;">
+		    <div class="apple-front-theme-top-rect" apple-style="CYBorder: 0; CYTheme: 1; CYImageShape: 9; CYShineOverBorder: 0; CYGlassIncludeArc: 0; CYImageCustomAboveLighting: 0; CYImageButtonType: 3; CYTopColor: 0.3455,0.3926,0.4721; CYBottomColor: 0.5347,0.6081,0.7376; CYBorderColor: 0.5000,0.5000,0.5000;" id="toproundedrect" apple-group="toproundedrect" apple-default-image-visibility="visible">
+	<img class="apple-hidden" src="Images/toproundedrect.png" theme="yes" apple-group="toproundedrect" id="toproundedrect0">
+<div class="apple-text" id="text" apple-group="text">﻿DUKE OF YORKS﻿</div>
+		    </div>
+	<div class="apple-front-theme-bottom-rect" apple-style="CYBorder: 0; CYTheme: 1; CYImageShape: 10; CYShineOverBorder: 0; CYGlassIncludeArc: 0; CYImageCustomAboveLighting: 0; CYImageButtonType: 3; CYTopColor: 0.5322,0.6049,0.7348; CYBottomColor: 0.3659,0.4161,0.4992; CYBorderColor: 0.5000,0.5000,0.5000;" id="bottomroundedrect" apple-group="bottomroundedrect" apple-default-image-visibility="visible">
+	<img class="apple-hidden" src="Images/bottomroundedrect.png" theme="yes" apple-group="bottomroundedrect" id="bottomroundedrect1">
+</div>
+		
+		<div id="container" apple-part="com.apple.dashcode.part.rssfeed">
+			<div id="contentarea" style="overflow: hidden; ">
+				<div class="content" id="content">Loading...</div>
+			</div>
+			<div id="scrollbar" class="apple-no-children" style="left: 277px; width: 19px; -apple-dashboard-region: none; "></div>
+			<script class="apple-hidden" type="text/javascript">var scrollArea = AppleCreateScrollArea('contentarea', 'scrollbar');</script> 
+		</div>
+		
+		<div class="info apple-no-children" id="info" apple-part="com.apple.dashcode.part.infobutton" apple-default-image-visibility="hidden" onclick="event.stopPropagation(); event.preventDefault();">
+		
+			<script class="apple-hidden" type="text/javascript">AppleCreateInfoButton('info', 'front', 'white', 'black', 'showBack');</script>
+		
+		</div>
+	</div>
+    <div id="back">
+	    <img id="backImg" class="apple-id" src="Images/back.png" alt="">
+	    <img class="backDevelopedWith" src="Images/DevelopedWith.png" alt="Created with Dashcode">
+	    
+	    <div class="group" id="slidergroup">
+	        <div class="grouptitle" apple-default-image-visibility="visible">Article Length</div>
+            <div id="sliderdiv">
+                <img src="Images/Smaller.tif" width="16" height="16" onclick="scaleToMin()">
+                <input id="slider" type="range" min="0" value="100" max="100" oninput="scaleArticles(this.value)" onmouseup="endScale()">
+                <img src="Images/Bigger.tif" width="16" height="16" onclick="scaleToMax()">
+            </div>
+        </div>
+
+        <div id="done" class="apple-no-children" apple-part="com.apple.dashcode.part.glassbutton">
+
+        	<script class="apple-hidden" type="text/javascript">AppleCreateGlassButton('done', 'Done', true, 'showFront');</script>
+
+        </div>
+    </div>
+	<div id="apple-initValues" class="apple-hidden">
+		<div id="apple-init-feedURL">http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=doyb</div>
+		<div id="apple-init-numItemsToShow">5</div>
+		<div id="apple-init-maxAgeToShow">0</div>
+		<div id="apple-init-showDate">0</div>
+	</div>
+</body>
+</html>

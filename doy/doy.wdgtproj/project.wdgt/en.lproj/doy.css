@@ -1,0 +1,213 @@
+body {
+	margin: 0px;
+}
+
+#frontimg {
+	position: absolute;
+	display: block;
+}
+
+.info {
+	position: absolute;
+	right: 20px;
+	bottom: 15px;
+	width: 13px;
+	height: 13px;
+}
+
+#back {
+	color: white;
+	font-size: 10pt;
+	display: none;
+}
+
+#backimg {
+	position: absolute;
+	display: block;
+	top: auto;
+	left: auto;
+}
+
+#apple-initvalues {
+	display: none;
+}
+
+#done {
+	position: absolute;
+	right: 18px;
+	bottom: 22px;
+}
+
+#feedtitle {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	color: white;
+	font: normal normal normal 18pt/normal Helvetica Neue;
+	font-weight: bold;
+}
+
+#slidergroup {
+	position: absolute;
+	background-image: none !important;
+	background-repeat: initial !important;
+	background-attachment: initial !important;
+	background-position-x: initial !important;
+	background-position-y: initial !important;
+	background-color: initial !important;
+	padding-top: 5px !important;
+	padding-bottom: 0px !important;
+	left: 103px;
+	top: 82px;
+}
+
+#feed {
+	position: absolute;
+	left: 0px;
+	top: 22px;
+	width: 372px;
+	font: normal normal normal 18px/normal Lucida Grande;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+#feed-bottom {
+	position: absolute;
+	left: 65px;
+	top: 34px;
+	font: normal normal normal 16px/normal Lucida Grande;
+	color: white;
+	text-transform: uppercase;
+	text-shadow: rgb(0, 52, 129) 0pt 1pt 1pt;
+}
+
+#container {
+	position: absolute;
+	top: 54px;
+	left: 11px;
+	right: 11px;
+	bottom: 31px;
+	overflow: hidden;
+}
+
+#contentarea {
+	display: block;
+	padding-right: 36px;
+	padding-left: 11px;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+}
+
+#scrollbar {
+	position: absolute;
+	right: 6px;
+	top: 6px;
+	bottom: 6px;
+}
+
+.backDevelopedWith {
+	position: absolute;
+	bottom: 22px;
+	left: 95px;
+	top: 172px;
+}
+
+#toproundedrect {
+	position: absolute;
+	top: 12px;
+	height: 42px;
+	left: 12px;
+	width: 302px;
+	display: block;
+}
+
+#bottomroundedrect {
+	position: absolute;
+	height: 19px;
+	top: 219px;
+	width: 302px;
+	left: 12px;
+	display: block;
+}
+
+#toproundedrect0 {
+	display: block;
+}
+
+#bottomroundedrect1 {
+	display: block;
+}
+
+#front {
+	display: block;
+}
+
+.group {
+	padding-top: 8px;
+	padding-left: 1px;
+	padding-bottom: 11px;
+	background-image: url(../Images/Separator.tif);
+	background-repeat: no-repeat;
+	background-attachment: initial;
+	background-position-x: 50%;
+	background-position-y: 0%;
+	background-color: initial;
+	line-height: 130%;
+}
+
+.grouptitle {
+	line-height: 180%;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	font-family: Helvetica;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+#sliderdiv {
+	margin-top: -2px;
+	margin-left: -3px;
+	margin-right: -10px;
+	margin-bottom: 4px;
+	width: 125px;
+}
+
+#sliderdiv input {
+	max-width: 83px;
+}
+
+#feedtitle {
+	text-shadow: rgb(255, 255, 255) 0px 0px 0px;
+}
+
+#feedtitle {
+	text-shadow: rgb(255, 255, 255) 0px 0px 7.52px;
+}
+
+#feedtitle {
+	text-shadow: rgb(255, 255, 255) 0px 0px 2.26px;
+}
+
+#feedtitle {
+	text-shadow: none;
+}
+
+#feedtitle {
+}
+
+#text {
+	position: absolute;
+	font-family: Helvetica Neue;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	font-size: 20.3333px;
+	top: 8px;
+	left: 12px;
+	text-shadow: rgb(255, 255, 255) 0px 0px 2px;
+}
+
