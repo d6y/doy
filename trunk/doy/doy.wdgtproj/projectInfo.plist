@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Steps</key>
+	<array>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>An RSS feed is used as the data source for this widget.
+
+To specify the feed to use, either drag an RSS feed URL onto the widget placeholder or select Attributes from the Object view and, under Property, specify your blog's RSS feed.</string>
+			<key>Required</key>
+			<true/>
+			<key>Title</key>
+			<string>Define feed source</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>Dashboard uses identifiers and version numbers to tell widgets apart. 
+			
+Select Attributes in the Object view and provide values for the Widget Identifier and Version. If your widget uses command line utilities, plug-ins, Java applets, or network resources, select the appropriate checkboxes under Network / Disk Access and Extentions.</string>
+			<key>Required</key>
+			<true/>
+			<key>Title</key>
+			<string>Supply needed attributes</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>Your widget shows its default image as it loads. 
+			
+To see what your default image looks like, select Default Image from the Object view. To exclude an element from your default image, select the element in the Canvas or the Object view, show Attributes portion of the Inspector, and deselect Show in Default Image.</string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Set the default image</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>Widget icons are used in the Widget Bar and Widget Manager. 
+			
+Select Widget Icon in the Object view to display the icon composer. Use the Fill and Stroke portion of the Inspector to change the color and style of the icon, or click Place and select an image to add it to the icon. </string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Design the widget icon</string>
+		</dict>
+		<dict>
+			<key>Completed</key>
+			<false/>
+			<key>Detail</key>
+			<string>Before deploying your widget, you should test it. 
+			
+To run your widget within Dashcode, click Run in the toolbar.  This loads your widget and shows a run log.  Test your widget to make sure it behaves as you expect it to.  
+
+When you're done with testing, select File &gt; Deploy Widget... to share it.</string>
+			<key>Recommended</key>
+			<true/>
+			<key>Title</key>
+			<string>Test and share your widget</string>
+		</dict>
+	</array>
+	<key>TemplateIdentifier</key>
+	<string>com.apple.dashcode.template.blogViewer</string>
+	<key>WidgetIconImageSettings</key>
+	<string>CYBorder: 0; CYTheme: 0; CYImageShape: 0; CYShineOverBorder: 0; CYGlassIncludeArc: 0; CYImageCustomAboveLighting: 0; CYTopColor: 1.0000,1.0000,1.0000; CYBottomColor: 0.6700,0.6700,0.6700; CYBorderColor: 0.0000,0.0000,0.0000;</string>
+</dict>
+</plist>
