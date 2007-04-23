@@ -12,7 +12,7 @@
 		<key>ContentSplitViewConfig</key>
 		<integer>8</integer>
 		<key>SplitViewConfig</key>
-		<integer>3</integer>
+		<integer>0</integer>
 		<key>_collapsingFrameDimension</key>
 		<real>0.0</real>
 		<key>_indexOfCollapsedView</key>
@@ -21,20 +21,20 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {899, 358}}</string>
-			<string>{{0, 368}, {899, 518}}</string>
+			<string>{{0, 0}, {790, 279}}</string>
+			<string>{{0, 289}, {790, 406}}</string>
 		</array>
 	</dict>
 	<key>ContentViewType</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>Dashboard Widget Prefs</key>
 	<dict>
 		<key>id</key>
-		<string>e9d5200b78ada741</string>
+		<string>7ae3d40d3bbaa741</string>
 		<key>in-layer</key>
 		<true/>
 		<key>path</key>
-		<string>/Users/richard/Developer/dashcode/doy/doy.wdgtproj/project.wdgt/</string>
+		<string>/Users/richard/Developer/dashcode/doy/doy/doy.wdgtproj/project.wdgt/</string>
 		<key>percent-offset-x</key>
 		<integer>0</integer>
 		<key>percent-offset-y</key>
@@ -42,13 +42,13 @@
 		<key>percent-type</key>
 		<integer>2</integer>
 		<key>percent-x</key>
-		<real>0.11547619104385376</real>
+		<real>0.32440477609634399</real>
 		<key>percent-y</key>
-		<real>0.11047618836164474</real>
+		<real>0.33142855763435364</real>
 		<key>pos-x</key>
-		<integer>1161</integer>
+		<integer>810</integer>
 		<key>pos-y</key>
-		<integer>116</integer>
+		<integer>348</integer>
 		<key>rosetta</key>
 		<false/>
 	</dict>
@@ -62,8 +62,8 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {243, 907}}</string>
-			<string>{{244, 0}, {900, 907}}</string>
+			<string>{{0, 0}, {213, 716}}</string>
+			<string>{{214, 0}, {791, 716}}</string>
 		</array>
 	</dict>
 	<key>NavigatorSplitViewGeometry</key>
@@ -80,8 +80,8 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {245, 478}}</string>
-			<string>{{0, 488}, {245, 398}}</string>
+			<string>{{0, 0}, {215, 438}}</string>
+			<string>{{0, 448}, {215, 247}}</string>
 		</array>
 	</dict>
 	<key>Objects view expanded items</key>
@@ -104,6 +104,10 @@
 		</array>
 	</array>
 	<key>Objects view last selections</key>
-	<array/>
+	<array>
+		<array>
+			<integer>2</integer>
+		</array>
+	</array>
 </dict>
 </plist>
