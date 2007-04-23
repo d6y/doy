@@ -1,3 +1,15 @@
+// Main UI for the widget.  This is the Apple RSS demo code, gutted where
+// needed for the DoY widget (which is why there's lots of stuff in here
+// that doesn't need to be).
+
+// How often to check for updates to the DoY web site (in milliseconds)
+// Default is once a day:
+var refreshMs = 1000 * 60 * 60 * 24 ;
+
+// For date formatting by formatDate():
+var monthName = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
 var initKeyPrefix = "apple-init-";
 
 var htmlFeedURL = null;
@@ -50,8 +62,8 @@ function show()
 	// and adjust your interface as needed
 	var now = (new Date).getTime();
 	
-	// only check if 15 minutes have passed
-	if ((now - last_updated) > 900000) {
+	// Only fetch the feed once a day (or whatever refreshMs is).
+	if ((now - last_updated) > refreshMs) {
 		if (xml_request != null) {
 			xml_request.abort();
 			xml_request = null;
@@ -155,19 +167,25 @@ function xml_loaded (e, request)
 		
 		// Get the top level element
 		var html = request.responseText;
-			
+
 	    var parser = new ListingsParser();
 		var results = parser.findMovies(html);
 
-		// Got no results?
-		if (results == null)
-			return;
-		
 		// TODO: Remove listings that have passed?
 		// results = filterEntries(results);
 
 		// Generate the display
-		addEntriesToContents(contents, results);
+		var n = addEntriesToContents(contents, results);
+
+		// Got no results?
+		if (n == 0)
+		{
+			var msg = document.createElement('div');
+			msg.innerText = "no listings found.";
+			contents.appendChild(msg);
+			return;
+		}
+
 
 		// update the scrollbar so scrollbar matches new data
 		scrollArea.refresh();
@@ -186,7 +204,7 @@ function removeEntriesFromContents(contents)
 
 function addEntriesToContents(contents, entries)
 {
-
+	var count = 0;
 	var even = true;		
 				
 	for(var title in entries)
@@ -194,7 +212,10 @@ function addEntriesToContents(contents, entries)
 	    var movie = entries[title];
 		even = !even;
 		contents.appendChild ( createRow(entries[title],even) );
+		count++;
 	}
+	
+	return count;
 	
 }
 
@@ -244,7 +265,7 @@ function createRow (movie, even)
 		{
 			var d = dates[i];
 			var times = movie.showing_dates[d.toString()];
-			info = info + d.getDate()+"/"+(1+d.getMonth())+"/"+d.getFullYear()+" @ "+times+"<br/>";
+			info = info + formatDate(d) +" @ "+times+"<br/>";
 			
 		}
 			desc_div.innerHTML = info;
@@ -252,6 +273,13 @@ function createRow (movie, even)
 
 		article.appendChild(desc_div);
 		return article;
+}
+
+function formatDate(d)
+{
+
+return dayName[d.getDay()] + " " + d.getDate() + " " + monthName[d.getMonth()];
+
 }
 
 function filterEntries(entries)
