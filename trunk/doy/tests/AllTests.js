@@ -35,6 +35,8 @@ if( !this.JsUtil )
     
     eval( JsUtil.prototype.include( "./lib/JsUnit.js" ));
     eval( JsUtil.prototype.include( "tests/ListingTest.js" ));
+    eval( JsUtil.prototype.include( "tests/MovieTest.js" ));
+
 
 }
 
@@ -46,6 +48,7 @@ function AllTests_suite()
 {
     var suite = new AllTests();
     suite.addTest( ListingTestSuite.prototype.suite());
+	suite.addTest( MovieTestSuite.prototype.suite());
    
     return suite;
 }

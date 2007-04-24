@@ -171,9 +171,16 @@ function xml_loaded (e, request)
 	    var parser = new ListingsParser();
 		var results = parser.findMovies(html);
 
-		// TODO: Remove listings that have passed?
-		// results = filterEntries(results);
+		// Remove listings that have passed
+		var now = new Date();
+		for(var title in results)
+		{
+			var movie = results[title];
+			movie.trimTo(now);
+		}
 
+		
+		
 		// Generate the display
 		var n = addEntriesToContents(contents, results);
 
@@ -282,29 +289,6 @@ return dayName[d.getDay()] + " " + d.getDate() + " " + monthName[d.getMonth()];
 
 }
 
-function filterEntries(entries)
-{
-	var result = new Array();
-	
-	var cutoffDate = null;
-	if (maxAgeToShow) {
-		cutoffDate = new Date((new Date()).getTime() - maxAgeToShow);
-	}
-
-	for (var i = 0; i < numItemsToShow; i++) {
-		var entry = entries[i];
-		var entryDate = entry.date;
-		if (entryDate == null) {
-			// No date, pretend it's today
-			entryDate = new Date();
-		}
-		if (cutoffDate == null || entryDate >= cutoffDate) {
-			result.push(entry);
-		}
-	}
-
-	return result;
-}
 
 // Correct hyperlinks in a document fragment to use the openURL function
 function fixLinks(htmlFragment)
