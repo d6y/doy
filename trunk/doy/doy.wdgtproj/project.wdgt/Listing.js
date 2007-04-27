@@ -10,10 +10,6 @@ function Listing(title,rating,date,time,url)
 	this.info_url = url;
 }
 
-Listing.prototype.movie_title;
-Listing.prototype.rating;
-Listing.prototype.showing_date;
-Listing.prototype.showing_time;
-Listing.prototype.info_url;
+
 
 

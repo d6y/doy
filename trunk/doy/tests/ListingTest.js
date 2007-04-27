@@ -20,17 +20,17 @@ function ListingTest_testCanParseFileContents()
     this.assertEquals(217, list.length);
 
 	// Check the first two...
-  	this.assertEquals("Days of Glory", list[0].movie_title);
-	this.assertEquals("12A", list[0].rating);
-	this.assertEquals(new Date(2007,3,11).toString(), list[0].showing_date.toString());
-	this.assertEquals("2:00 PM", list[0].showing_time);
-	this.assertEquals("/cinema_home_date.aspx?eventId=0wq4ho%40doyb", list[0].info_url);
+  	this.assertEquals("Wrong 1st title", "Days of Glory", list[0].movie_title);
+	this.assertEquals("Wrong 1st rating","12A", list[0].rating);
+	this.assertEquals("Wrong 1st date", new Date(2007,3,11).toString(), list[0].showing_date.toString());
+	this.assertEquals("Wrong first time" ,"2:00 PM", list[0].showing_time);
+	this.assertEquals("Wrong first url","/cinema_home_date.aspx?eventId=0wq4ho%40doyb", list[0].info_url);
 
-	this.assertEquals("Days of Glory", list[1].movie_title);
-	this.assertEquals("12A", list[1].rating);
-	this.assertEquals(new Date(2007,3,11).toString(), list[1].showing_date.toString());
-	this.assertEquals("6:30 PM", list[1].showing_time);
-	this.assertEquals("/cinema_home_date.aspx?eventId=0wq4ho%40doyb", list[1].info_url);
+	this.assertEquals("Wrong 2nd title","Days of Glory", list[1].movie_title);
+	this.assertEquals("Wrong 2nd rating","12A", list[1].rating);
+	this.assertEquals("Wrong 2nd date", new Date(2007,3,11).toString(), list[1].showing_date.toString());
+	this.assertEquals("Wrong 2nd time","6:30 PM", list[1].showing_time);
+	this.assertEquals("Wrong 2nd url", "/cinema_home_date.aspx?eventId=0wq4ho%40doyb", list[1].info_url);
 
 	// Check the last one:
 	this.assertEquals("Wrong last title","Zodiac", list[216].movie_title);
