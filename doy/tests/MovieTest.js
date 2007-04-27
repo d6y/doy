@@ -32,8 +32,12 @@ function MovieTest_testCanTrim()
 	movie.addShowing( today, "11:00 AM" );
 	movie.addShowing( today, "9:30 PM" );
 	
+	this.assertEquals("Movie sanity check failed", 1, movie.orderedDates().length);
+	this.assertEquals("Showing sanity check failed", 2, movie.showingsOn(today).length);
+	
+	
 	// If it's 9PM now, we should only have one showing left:
-	var now = new Date(2007, 0, 1, 21, 00);
+	var now = new Date(2007, 0, 1, 21, 0, 0);
 	movie.trimTo(now);
 
 	this.assertEquals("Expected one date", 1, movie.orderedDates().length);

@@ -30,7 +30,7 @@
 	<key>Dashboard Widget Prefs</key>
 	<dict>
 		<key>id</key>
-		<string>e5647a3a2ebda741</string>
+		<string>548e41469dc4a741</string>
 		<key>in-layer</key>
 		<true/>
 		<key>path</key>
@@ -42,13 +42,13 @@
 		<key>percent-type</key>
 		<integer>2</integer>
 		<key>percent-x</key>
-		<real>0.32440477609634399</real>
+		<real>0.15595237910747528</real>
 		<key>percent-y</key>
-		<real>0.33142855763435364</real>
+		<real>0.080952383577823639</real>
 		<key>pos-x</key>
-		<integer>810</integer>
+		<integer>1093</integer>
 		<key>pos-y</key>
-		<integer>348</integer>
+		<integer>85</integer>
 		<key>rosetta</key>
 		<false/>
 	</dict>

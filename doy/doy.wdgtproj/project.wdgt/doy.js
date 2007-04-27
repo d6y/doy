@@ -60,7 +60,7 @@ function show()
 {
 	// your widget has just been shown.  restart any timers
 	// and adjust your interface as needed
-	var now = (new Date).getTime();
+	var now = new Date().getTime();
 	
 	// Only fetch the feed once a day (or whatever refreshMs is).
 	if ((now - last_updated) > refreshMs) {
@@ -70,7 +70,7 @@ function show()
 		}
 		xml_request = new XMLHttpRequest();
 
-		xml_request.onload = function(e) {xml_loaded(e, xml_request);}
+		xml_request.onload = function(e) {xml_loaded(e, xml_request);} ;
 		xml_request.open("GET", feed.url);
 		xml_request.setRequestHeader("Cache-Control", "no-cache");
 		xml_request.send(null);
@@ -85,13 +85,17 @@ function showBack(event)
 	var back = document.getElementById("back");
 
 	if (window.widget)
+	{
 		widget.prepareForTransition("ToBack");
+    }
 
 	front.style.display="none";
 	back.style.display="block";
 	
 	if (window.widget)
+	{
 		setTimeout('widget.performTransition();', 0);
+	}
 }
 
 function showFront(event)
@@ -102,13 +106,17 @@ function showFront(event)
 	var back = document.getElementById("back");
 
 	if (window.widget)
+	{
 		widget.prepareForTransition("ToFront");
+	}
 
 	front.style.display="block";
 	back.style.display="none";
 	
 	if (window.widget)
+	{
 		setTimeout('widget.performTransition();', 0);
+	}
 
 	scrollArea.refresh();
 }
@@ -149,7 +157,9 @@ function findChild(element, nodeName)
 	
 	for (child = element.firstChild; child != null; child = child.nextSibling) {
 		if (child.nodeName == nodeName)
+		{
 			return child;
+		}
 	}
 	
 	return null;
@@ -198,7 +208,7 @@ function xml_loaded (e, request)
 		scrollArea.refresh();
 		
 		// set last_updated to the current time to keep track of the last time a request was posted
-		last_updated = (new Date).getTime();
+		last_updated = new Date().getTime();
 	}
 }
 

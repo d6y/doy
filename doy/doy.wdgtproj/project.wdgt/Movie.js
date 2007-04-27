@@ -5,16 +5,16 @@ function Movie(title,rating,url)
 {
 	this.movie_title = title;
 	this.rating = rating;
-	// Hash: key=date string, value=list of times, format "HH:MM AM|PM"
-	this.showing_dates = new Object(); 
-	this.ordered_dates = new Array();
+	this.showing_dates = {}; //hash: key=date, value=list of times, format "HH:MM AM|PM"
+	this.ordered_dates = []; 
 	this.info_url = url;
 }
 
 Movie.prototype.addShowing = function(date,time)
 {
-	var times = this.showing_dates[date];
 	
+	var times = this.showing_dates[date];
+
 	if (times == undefined)
 	{
 		times = [];
@@ -42,13 +42,13 @@ Movie.prototype.addShowing = function(date,time)
 Movie.prototype.orderedDates = function()
 {
 	return this.ordered_dates;
-}
+};
 
 
 Movie.prototype.showingsOn = function (date)
 {
 	return this.showing_dates[date];
-}
+};
 
 /*
   Remove any dates form this movie that are before
@@ -56,45 +56,47 @@ Movie.prototype.showingsOn = function (date)
 */
 Movie.prototype.trimTo = function (now)
 {
-	// build up a new list of ordered dates.
-	var new_dates = new Array();
+    var now_milliseconds = now.getTime();
 
+	// build up a new list of ordered dates (the ones left after trimming)
+	var new_dates = [];
+	
 	var n = this.ordered_dates.length;
 	for(i=0; i<n; i++)
 	{
 		var date = this.ordered_dates[i];
+		var showing_times = this.showing_dates[date];
 		
-		if ( date.getTime() >= now.getTime() )
+		// Build up a new list of showing times (the ones left after trimming)
+		var new_showing_times = [];
+
+		var m=showing_times.length;
+		for(j=0; j<m; j++)
 		{
-		
-			var showing_times = this.showing_dates[date];
-			var new_showing_times = new Array();
-		
-			var m=showing_times.length;
-			for(j=0; j<m; j++)
-			{
-				// Convert time and date into a Date object
-				var showing_date_time = this.makeDateTime(date, showing_times[j]);
-			
-				if (now.getTime() < showing_date_time.getTime() )
-				{
-					new_showing_times[new_showing_times.length] = showing_times[j];
-				}
-			
-			} //end for times
+			// Convert time and date into a Date object
+			var showing_date_time = this.makeDateTime(date, showing_times[j]);
 	
-			if (new_showing_times.length > 0)
+			if (showing_date_time.getTime() >= now_milliseconds)
 			{
-				new_dates[new_dates.length] = date;
-				this.showing_dates[date] = new_showing_times;	
+				// only keep future showings
+				new_showing_times[new_showing_times.length] = showing_times[j];
 			}
+	
+		} //end for times
+
+		// only keep dates that have some showing times.
+		if (new_showing_times.length > 0)
+		{
+			new_dates[new_dates.length] = date;
+			this.showing_dates[date] = new_showing_times;	
 		}
+		
 						
 	} //end for dates
 	
 	this.ordered_dates = new_dates;
 	
-}
+};
 
 /*
 Convert a date plus a time string such as 09:00 PM
@@ -115,13 +117,10 @@ Movie.prototype.makeDateTime = function(date, timeString)
 
 	return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, min);
 
-}
+};
 
 
-Movie.prototype.movie_title;
-Movie.prototype.showing_dates;
-Movie.prototype.info_url;
-Movie.prototype.rating;
+
 
 
 

@@ -26,10 +26,10 @@ The output of this function is a flat array of Listing objects.
 */
 ListingsParser.prototype.findAll = function(text)
 {
-		var movies = new Array();
+		var movies = [];
 		this.parse( text, function(listing) { movies[movies.length] = listing; } ); 
 		return movies;
-}
+};
 
 
 /**
@@ -55,7 +55,7 @@ Example usage:
 */
 ListingsParser.prototype.findMovies = function(text)
 {
-		var movies = new Object();
+		var movies = {};
 		
 		this.parse( text, 
 			function(listing) 
@@ -72,7 +72,7 @@ ListingsParser.prototype.findMovies = function(text)
 			} ); 
 			
 		return movies;
-}
+};
 
 
 
@@ -118,11 +118,13 @@ ListingsParser.prototype.parse = function(text, callback)
 		var timeRe = /class="(FilmListingTime|FilmListingTimeSoldOut)"[^>]*>([^<]+)</gm;
 		
 	    // For each film on the day...
+		// NB: !== used here will cause the unit tests to fail under Rhino. 
 		while ( (links = listingRe.exec(dayListings)) != undefined)
 		{
 			var url = links[1]; // relative URL for info about the film
 			var title = links[2];
-			var rating = undefined;
+
+			var rating = null;
 			
 			// format for the title seems to be: "title (rating)" or "title"
 			var openBrace = title.lastIndexOf("(");
@@ -136,7 +138,7 @@ ListingsParser.prototype.parse = function(text, callback)
 			{
 				// var type = times[1]; // FilmListingTime or FilmListingTimeSoldOut
 				var showingTime = times[2]; // e.g., "9:00 PM"
-				
+			
 				callback( new Listing(title, rating, date, showingTime, url) );
 				
 			} //end while each time
@@ -145,7 +147,7 @@ ListingsParser.prototype.parse = function(text, callback)
 		
     } // end while each day		
 	
-}
+};
 
 /**
 Helper to convert an array of date parts into a Date object.
@@ -159,6 +161,6 @@ ListingsParser.prototype.createDate = function(dateParts)
 					   "June":5, "July":6, "August":7, "September":8, "October":9,
 					   "November":10, "December":11};
 
-	return new Date(dateParts[4],monthNames[dateParts[3]],dateParts[2] )
-}
+	return new Date(dateParts[4],monthNames[dateParts[3]],dateParts[2] );
+};
 
