@@ -16,6 +16,7 @@
     <script type="text/javascript" src="doy.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Listing.js" charset="utf-8"></script>
 	<script type="text/javascript" src="Movie.js" charset="utf-8"></script>
+	<script type="text/javascript" src="Cinema.js" charset="utf-8"></script>
     <script type="text/javascript" src="ListingsParser.js" charset="utf-8"></script>
     <script type="text/javascript" src="localizedStrings.js" charset="utf-8"></script>
 </head>
@@ -48,26 +49,27 @@
 	    <img id="backImg" class="apple-id" src="Images/back.png" alt="">
 	    <img class="backDevelopedWith" src="Images/DevelopedWith.png" alt="Created with Dashcode">
 	    
-	    <div class="group" id="slidergroup">
-	        <div class="grouptitle" apple-default-image-visibility="visible">Article Length</div>
-            <div id="sliderdiv">
-                <img src="Images/Smaller.tif" width="16" height="16" onclick="scaleToMin()">
-                <input id="slider" type="range" min="0" value="100" max="100" oninput="scaleArticles(this.value)" onmouseup="endScale()">
-                <img src="Images/Bigger.tif" width="16" height="16" onclick="scaleToMax()">
-            </div>
-        </div>
+	    
 
         <div id="done" class="apple-no-children" apple-part="com.apple.dashcode.part.glassbutton">
+	    
+	    
 
         	<script class="apple-hidden" type="text/javascript">AppleCreateGlassButton('done', 'Done', true, 'showFront');</script>
+	    
+	    
 
         </div>
+    
+    <select apple-group="popup"> 	<option apple-group="popup">Item1</option> 	<option apple-group="popup">Item2</option> 	<option apple-group="popup">Item3</option>
+    
+    </select>
+    <select id="popup" apple-group="popup" onchange="cinemaSelected();"> 	<option apple-group="popup">Item1</option> 	<option apple-group="popup">Item2</option> 	<option apple-group="popup">Item3</option>
+    </select>
     </div>
 	<div id="apple-initValues" class="apple-hidden">
 		<div id="apple-init-feedURL">http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=doyb</div>
-		<div id="apple-init-numItemsToShow">5</div>
-		<div id="apple-init-maxAgeToShow">0</div>
-		<div id="apple-init-showDate">0</div>
+
 	</div>
 </body>
 </html>

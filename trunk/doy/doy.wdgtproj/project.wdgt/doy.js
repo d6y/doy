@@ -10,37 +10,41 @@ var refreshMs = 1000 * 60 * 60 * 24 ;
 var monthName = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
+
+// List of Cinema objects ordered alpha by city
+var cinemas ;
+
 var initKeyPrefix = "apple-init-";
+
+// The user's cinema name:
+var myCinema = "Duke Of Yorks";
+var myCinemaChanged = false;
 
 var htmlFeedURL = null;
 var feedURLKey = "feedURL";
-var numItemsToShow = 1;
-var numItemsToShowKey = "numItemsToShow";
-var maxAgeToShowKey = "maxAgeToShow";
-var maxAgeToShow = 0;
-var showDateKey = "showDate";
-var showDate = 1;
+
 var feed = { url: null, title: "" };
 var newFeedURL = null;
-var feedAdded = false;
+
 
 var last_updated = 0;
 var xml_request = null;
 
-var slider;
 
 function load()
 {    
-	numItemsToShow = getPropertyFromHTML(numItemsToShowKey, numItemsToShow);
-	maxAgeToShow   = getPropertyFromHTML(maxAgeToShowKey, maxAgeToShow);
-	showDate       = getPropertyFromHTML(showDateKey, showDate);
-
-	slider = document.getElementById("slider");
+	cinemas = [
+		new Cinema("Bath", "The Little Theatre Cinema", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=bath"),
+		new Cinema("Brighton", "Duke Of Yorks", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=doyb"),
+		new Cinema("Cambridge", "Arts Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=camb")
+	];
 
 	if (window.widget) {
 		htmlFeedURL = getFeedSource();		
 		feed.url = htmlFeedURL;
 		setFeedURL(feed.url);
+
+			
 	}
 }
 
@@ -58,16 +62,36 @@ function hide()
 
 function show()
 {
+
 	// your widget has just been shown.  restart any timers
 	// and adjust your interface as needed
-	var now = new Date().getTime();
+	fetchListings();
+}
+
+function fetchListings()
+{
+
+var now = new Date().getTime();
 	
 	// Only fetch the feed once a day (or whatever refreshMs is).
-	if ((now - last_updated) > refreshMs) {
+	if ((now - last_updated) > refreshMs) 
+	{
+	
+		htmlFeedURL = getFeedSource();		
+		feed.url = htmlFeedURL;
+		setFeedURL(feed.url);
+
+	
 		if (xml_request != null) {
 			xml_request.abort();
 			xml_request = null;
+			alert("not null");
 		}
+
+		// Remove the old entries
+		var contents = document.getElementById('content');
+		removeEntriesFromContents(contents);
+
 		xml_request = new XMLHttpRequest();
 
 		xml_request.onload = function(e) {xml_loaded(e, xml_request);} ;
@@ -75,11 +99,27 @@ function show()
 		xml_request.setRequestHeader("Cache-Control", "no-cache");
 		xml_request.send(null);
     }
+
 }
+
 
 function showBack(event)
 {
 	// your widget needs to show the back
+	var select = document.getElementById("popup");
+	
+		for (i = 0; i<cinemas.length ; i++)
+		{
+		
+			select.options[i].value = cinemas[i].city;
+			select.options[i].text = cinemas[i].city;
+			if (myCinema == cinemas[i].name)
+			{
+				select.options[i].selected = true;
+			}
+	 }
+
+
 
 	var front = document.getElementById("front");
 	var back = document.getElementById("back");
@@ -102,6 +142,11 @@ function showFront(event)
 {
 	// your widget needs to show the front
 
+	if (myCinemaChanged)
+	{
+	    fetchListings();
+		myCinemaChanged = false;
+	}
 	var front = document.getElementById("front");
 	var back = document.getElementById("back");
 
@@ -141,14 +186,27 @@ function getPropertyFromHTML(propertyKey, defaultValue)
 
 function getFeedSource()
 {
-	var url = getPropertyFromHTML(feedURLKey);
+//	var url = getPropertyFromHTML(feedURLKey);
 
-	if (url) {
-		if (url.substring(0,7).toLowerCase() != "http://") {
-			url = "http://" + url;
+//	if (url) {
+//		if (url.substring(0,7).toLowerCase() != "http://") {
+//			url = "http://" + url;
+//		}
+//	}
+//	return url;
+
+	for (i = 0; i<cinemas.length ; i++)
+	{
+		if (myCinema == cinemas[i].name)
+		{
+			return cinemas[i].url;
 		}
-	}
-	return url;
+	 }
+
+	return null;
+
+
+
 }
 
 function findChild(element, nodeName)
@@ -433,15 +491,22 @@ function endScale()
 	//scrollArea.refresh();
 }
 
-function scaleTo( value ) {
-	slider.value = value;
-	scaleArticles( value );
-}
 
-function scaleToMin() {
-	scaleTo( slider.min);
-}
 
-function scaleToMax() {
-	scaleTo( slider.max );
+
+/*
+Called when the user selects a cinema.  We could defer this until
+they hit the done button. 
+*/
+function cinemaSelected() 
+{
+	var select = document.getElementById("popup");
+
+    myCinema = cinemas[select.selectedIndex].name;
+	
+	document.getElementById("text").innerHTML = myCinema;
+
+	
+	last_updated = 0;
+	myCinemaChanged = true;
 }

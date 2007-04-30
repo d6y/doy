@@ -1,4 +1,5 @@
 load("doy.wdgtproj/project.wdgt/Listing.js");
+load("doy.wdgtproj/project.wdgt/Cinema.js");
 load("doy.wdgtproj/project.wdgt/ListingsParser.js");
 
 function ListingTest( name )
