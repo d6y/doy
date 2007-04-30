@@ -179,7 +179,7 @@ function xml_loaded (e, request)
 		var html = request.responseText;
 
 	    var parser = new ListingsParser();
-		var results = parser.findMovies(html);
+		var results = parser.findMovies(html, getFeedSource());
 
 		// Remove listings that have passed
 		var now = new Date();
@@ -248,6 +248,8 @@ function createRow (movie, even)
 
 	var articlehead = document.createElement('a');
 	articlehead.setAttribute('class', 'articlehead');
+	articlehead.href = movie.info_url;
+	articlehead.onclick = function() { widget.openURL(this.href); return false; };
 
 	//if (link != null) {
 	//	articlehead.setAttribute('the_link', link);
