@@ -47,20 +47,6 @@ body {
 	font-weight: bold;
 }
 
-#slidergroup {
-	position: absolute;
-	background-image: none !important;
-	background-repeat: initial !important;
-	background-attachment: initial !important;
-	background-position-x: initial !important;
-	background-position-y: initial !important;
-	background-color: initial !important;
-	padding-top: 5px !important;
-	padding-bottom: 0px !important;
-	left: 103px;
-	top: 82px;
-}
-
 #feed {
 	position: absolute;
 	left: 0px;
@@ -169,14 +155,6 @@ body {
 	font-size: 13px;
 }
 
-#sliderdiv {
-	margin-top: -2px;
-	margin-left: -3px;
-	margin-right: -10px;
-	margin-bottom: 4px;
-	width: 125px;
-}
-
 #sliderdiv input {
 	max-width: 83px;
 }
@@ -209,5 +187,31 @@ body {
 	top: 8px;
 	left: 12px;
 	text-shadow: rgb(255, 255, 255) 0px 0px 2px;
+}
+
+#cinemamenu {
+	position: absolute;
+	top: 99px;
+	width: 190px;
+	left: 67px;
+}
+
+#cinemamenu {
+	display: none;
+}
+
+#cinemamenu {
+	display: block;
+}
+
+#popup {
+	position: absolute;
+	width: 194px;
+	top: 94px;
+	left: 63px;
+}
+
+#popup {
+	position: absolute;
 }
 
