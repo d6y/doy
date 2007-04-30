@@ -53,9 +53,12 @@ Example usage:
 
 
 */
-ListingsParser.prototype.findMovies = function(text)
+ListingsParser.prototype.findMovies = function(text, base_url)
 {
 		var movies = {};
+		
+		// XXX Proper URL resolving would be nicer...
+		var site_url = base_url.match(/^(\w+:\/\/[^\/]+)/)[1];
 		
 		this.parse( text, 
 			function(listing) 
@@ -63,7 +66,7 @@ ListingsParser.prototype.findMovies = function(text)
 				var m = movies[listing.movie_title];
 				if (m == undefined)
 				{
-					m = new Movie(listing.movie_title, listing.rating, listing.info_url);
+					m = new Movie(listing.movie_title, listing.rating, site_url + listing.info_url);
 					movies[listing.movie_title] = m;
 				}
 				
