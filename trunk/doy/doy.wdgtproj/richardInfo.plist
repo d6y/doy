@@ -21,8 +21,8 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {916, 259}}</string>
-			<string>{{0, 269}, {916, 406}}</string>
+			<string>{{0, 0}, {1220, 342}}</string>
+			<string>{{0, 352}, {1220, 406}}</string>
 		</array>
 	</dict>
 	<key>ContentViewType</key>
@@ -30,7 +30,7 @@
 	<key>Dashboard Widget Prefs</key>
 	<dict>
 		<key>id</key>
-		<string>e608797b01cda741</string>
+		<string>e09ea70a74cea741</string>
 		<key>in-layer</key>
 		<true/>
 		<key>path</key>
@@ -40,15 +40,15 @@
 		<key>percent-offset-y</key>
 		<integer>0</integer>
 		<key>percent-type</key>
-		<integer>2</integer>
+		<integer>1</integer>
 		<key>percent-x</key>
-		<real>0.26607143878936768</real>
+		<real>0.3571428656578064</real>
 		<key>percent-y</key>
-		<real>0.10857142508029938</real>
+		<real>0.22761905193328857</real>
 		<key>pos-x</key>
-		<integer>908</integer>
+		<integer>600</integer>
 		<key>pos-y</key>
-		<integer>114</integer>
+		<integer>239</integer>
 		<key>rosetta</key>
 		<false/>
 	</dict>
@@ -62,8 +62,8 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {213, 696}}</string>
-			<string>{{214, 0}, {917, 696}}</string>
+			<string>{{0, 0}, {213, 779}}</string>
+			<string>{{214, 0}, {1221, 779}}</string>
 		</array>
 	</dict>
 	<key>NavigatorSplitViewGeometry</key>
@@ -80,8 +80,8 @@
 		<real>0.0</real>
 		<key>sizes</key>
 		<array>
-			<string>{{0, 0}, {215, 424}}</string>
-			<string>{{0, 434}, {215, 241}}</string>
+			<string>{{0, 0}, {215, 472}}</string>
+			<string>{{0, 482}, {215, 276}}</string>
 		</array>
 	</dict>
 	<key>Objects view expanded items</key>
