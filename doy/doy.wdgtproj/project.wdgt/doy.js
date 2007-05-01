@@ -33,10 +33,28 @@ var xml_request = null;
 
 function load()
 {    
+
+// This one may be different:
+// new Cinema("All London Picturehouses", "All London Picturehouses", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=allLondon"),
+ 
 	cinemas = [
-		new Cinema("Bath", "The Little Theatre Cinema", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=bath"),
+		new Cinema("Aberdeen", "The Belmont Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=bmnt"),
+		new Cinema("Bath","The Little Theatre Cinema", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=bath"),
 		new Cinema("Brighton", "Duke Of Yorks", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=doyb"),
-		new Cinema("Cambridge", "Arts Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=camb")
+		new Cinema("Brixton", "Ritzy Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=ritz"),
+		new Cinema("Cambridge", "Arts Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=camb"),
+		new Cinema("Clapham", "Clapham Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=cph"),
+		new Cinema("Edinburgh", "Cameo Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=edbg"),
+		new Cinema("Exeter", "Exeter Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=xtr"),
+		new Cinema("Greenwich", "Greenwich Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=gnw"),
+		new Cinema("Henley-on-Thames", "Regal Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=rgl"),
+		new Cinema("Liverpool", "Picturehouse at FACT", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=fact"),
+		new Cinema("Notting Hill", "Gate Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=gate"),
+		new Cinema("Oxford", "Phoenix Picturehouse", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=oxfd"),
+		new Cinema("Southampton", "Harbour Lights", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=hlsh"),
+		new Cinema("Stratford", "Stratford East", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=se"),
+		new Cinema("Stratford-upon-Avon", "Stratford upon Avon", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=soa"),
+		new Cinema("York", "City Screen", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=york")
 	];
 
 	if (window.widget) {
@@ -106,19 +124,21 @@ var now = new Date().getTime();
 function showBack(event)
 {
 	// your widget needs to show the back
+
+	// Populate the drop-down list of cinemas:
+	
 	var select = document.getElementById("popup");
 	
-		for (i = 0; i<cinemas.length ; i++)
-		{
+	
+	for (i = 0; i<cinemas.length ; i++)
+	{
+		select.options[i] = new Option(cinemas[i].city, cinemas[i].city);
 		
-			select.options[i].value = cinemas[i].city;
-			select.options[i].text = cinemas[i].city;
-			if (myCinema == cinemas[i].name)
-			{
-				select.options[i].selected = true;
-			}
-	 }
-
+		if (myCinema == cinemas[i].name)
+		{
+			select.options[i].selected = true;
+		}
+	}
 
 
 	var front = document.getElementById("front");
