@@ -10,21 +10,17 @@ var refreshMs = 1000 * 60 * 60 * 24 ;
 var monthName = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-
 // List of Cinema objects ordered alpha by city
-var cinemas ;
-
-var initKeyPrefix = "apple-init-";
+var cinemas;
 
 // The user's cinema name:
 var myCinema = "Duke Of Yorks";
+
+// The user's cinema is persisted under this key:
+var MY_CINEMA_KEY = "cinema";
+
+// Used to refresh the listings if the user changes their cinema
 var myCinemaChanged = false;
-
-var htmlFeedURL = null;
-var feedURLKey = "feedURL";
-
-var feed = { url: null, title: "" };
-var newFeedURL = null;
 
 
 var last_updated = 0;
@@ -57,12 +53,17 @@ function load()
 		new Cinema("York", "City Screen", "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=york")
 	];
 
-	if (window.widget) {
-		htmlFeedURL = getFeedSource();		
-		feed.url = htmlFeedURL;
-		setFeedURL(feed.url);
+	if (window.widget) 
+	{
+		// Restore user's selected cinema:
+		var cinemaString = widget.preferenceForKey(MY_CINEMA_KEY);
+		if (cinemaString && cinemaString.length > 0)
+		{
+			myCinema = cinemaString;
+			document.getElementById("text").innerHTML = myCinema; // set title
+		}
 
-			
+		
 	}
 }
 
@@ -89,17 +90,12 @@ function show()
 function fetchListings()
 {
 
-var now = new Date().getTime();
+	var now = new Date().getTime();
 	
 	// Only fetch the feed once a day (or whatever refreshMs is).
 	if ((now - last_updated) > refreshMs) 
 	{
-	
-		htmlFeedURL = getFeedSource();		
-		feed.url = htmlFeedURL;
-		setFeedURL(feed.url);
 
-	
 		if (xml_request != null) {
 			xml_request.abort();
 			xml_request = null;
@@ -113,7 +109,7 @@ var now = new Date().getTime();
 		xml_request = new XMLHttpRequest();
 
 		xml_request.onload = function(e) {xml_loaded(e, xml_request);} ;
-		xml_request.open("GET", feed.url);
+		xml_request.open("GET", getFeedSource());
 		xml_request.setRequestHeader("Cache-Control", "no-cache");
 		xml_request.send(null);
     }
@@ -192,28 +188,10 @@ if (window.widget) {
 	widget.onshow = show;
 }
 
-// Retrieve the contents of an HTML div
-function getPropertyFromHTML(propertyKey, defaultValue)
-{
-	var element = document.getElementById(initKeyPrefix + propertyKey);
-	if (element) {
-		return trim(element.innerHTML);
-	}
-	else {
-		return defaultValue;
-	}
-}
 
 function getFeedSource()
 {
-//	var url = getPropertyFromHTML(feedURLKey);
 
-//	if (url) {
-//		if (url.substring(0,7).toLowerCase() != "http://") {
-//			url = "http://" + url;
-//		}
-//	}
-//	return url;
 
 	for (i = 0; i<cinemas.length ; i++)
 	{
@@ -374,83 +352,9 @@ function createRow (movie, even)
 
 function formatDate(d)
 {
-
-return dayName[d.getDay()] + " " + d.getDate() + " " + monthName[d.getMonth()];
-
+	return dayName[d.getDay()] + " " + d.getDate() + " " + monthName[d.getMonth()];
 }
 
-
-// Correct hyperlinks in a document fragment to use the openURL function
-function fixLinks(htmlFragment)
-{
-	// Collect all the links
-	var links = htmlFragment.getElementsByTagName("a");
-	for (var i = 0; i < links.length; i++) {
-		var aNode = links[i];
-		// Send them to our clickOnLink function
-		aNode.onclick = clickOnLink;
-	}
-}
-
-// XXX - http://delete.me.uk/2005/03/iso8601.html
-// XXX - license unclear, discuss or replace
-Date.prototype.setISO8601 = function (string) {
-    var regexp = "([0-9]{4})(-([0-9]{2})(-([0-9]{2})" +
-        "(T([0-9]{2}):([0-9]{2})(:([0-9]{2})(\.([0-9]+))?)?" +
-        "(Z|(([-+])([0-9]{2}):([0-9]{2})))?)?)?)?";
-    var d = string.match(new RegExp(regexp));
-
-    var offset = 0;
-    var date = new Date(d[1], 0, 1);
-
-    if (d[3]) { date.setMonth(d[3] - 1); }
-    if (d[5]) { date.setDate(d[5]); }
-    if (d[7]) { date.setHours(d[7]); }
-    if (d[8]) { date.setMinutes(d[8]); }
-    if (d[10]) { date.setSeconds(d[10]); }
-    if (d[12]) { date.setMilliseconds(Number("0." + d[12]) * 1000); }
-    if (d[14]) {
-        offset = (Number(d[16]) * 60) + Number(d[17]);
-        offset *= ((d[15] == '-') ? 1 : -1);
-    }
-
-    offset -= date.getTimezoneOffset();
-    time = (Number(date) + (offset * 60 * 1000));
-    this.setTime(Number(time));
-}
-
-
-function compTop10Func(a, b)
-{
-	var aInt = parseInt(a.title);
-	var bInt = parseInt(b.title);
-	if (aInt < bInt)
-		return -1;
-	else if (aInt > bInt)
-		return 1;
-	else
-		return 0;
-}
-
-function compTitleFunc(a, b)
-{
-	if (a.title < b.title)
-		return -1;
-	else if (a.title > b.title)
-		return 1;
-	else
-		return 0;
-}
-
-function compFunc(a, b)
-{
-	if (a.date < b.date)
-		return 1;
-	else if (a.date > b.date)
-		return -1;
-	else
-		return 0;
-}
 
 function createDateStr (date)
 {
@@ -488,17 +392,8 @@ function clickOnTitle(event, div)
 	}
 }
 
-function clickOnFeedTitle(event)
-{
-	if (window.widget) {
-		widget.openURL(feed.url);
-	}
-}
 
-function setFeedURL(newURL)
-{
-	newFeedURL = newURL;
-}
+
 
 function scaleArticles( value )
 {
@@ -521,12 +416,24 @@ they hit the done button.
 function cinemaSelected() 
 {
 	var select = document.getElementById("popup");
+    var selectedCinema = cinemas[select.selectedIndex].name;
 
-    myCinema = cinemas[select.selectedIndex].name;
-	
-	document.getElementById("text").innerHTML = myCinema;
+	if (selectedCinema != myCinema)
+	{
+		myCinema = selectedCinema;
+		
+		// User has changed cinema so force reload and save new preference
+		if (window.widget)
+		{
+		    widget.setPreferenceForKey(myCinema,MY_CINEMA_KEY);
+		}
+		
+		// Change title:
+		document.getElementById("text").innerHTML = myCinema;
 
-	
-	last_updated = 0;
-	myCinemaChanged = true;
+		// This will trigger reload of listing in showFront()
+		last_updated = 0;
+		myCinemaChanged = true;
+	}
+
 }
