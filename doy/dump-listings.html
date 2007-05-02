@@ -1,0 +1,73 @@
+<head>
+   <title>Helper for showing the results of parsing the listings - Run in Safari only</title>
+  <script type="text/javascript" src="./doy.wdgtproj/project.wdgt/Listing.js"></script>
+  <script type="text/javascript" src="./doy.wdgtproj/project.wdgt/Cinema.js"></script>
+  <script type="text/javascript" src="./doy.wdgtproj/project.wdgt/Movie.js"></script>
+  <script type="text/javascript" src="./doy.wdgtproj/project.wdgt/ListingsParser.js"></script>
+  </head>
+  <body>
+      <script type="text/javascript">
+
+function sampleData()
+{
+	var oXML=new XMLHttpRequest();
+	oXML.open("GET","http://doy.googlecode.com/svn/trunk/doy/tests/listing.html", false);
+	oXML.send(null);
+	sRes=oXML.responseText;
+	return sRes;
+}
+
+var html = sampleData();
+var parser = new ListingsParser();
+
+
+function showListings()
+{
+	list = parser.findAll(html);
+
+	document.write("<ol>");
+	for(i=0; i<list.length; i++)
+	{
+		document.write("<li> " + list[i].movie_title
+			+" " + list[i].showing_date + "@" + list[i].showing_time +"</li>");
+	}
+	document.write("</ol>");
+}
+
+function showMovies()
+{
+	
+	list = parser.findMovies(html, "http://www.picturehouses.co.uk/cinema_home_date.aspx?venueId=doyb");
+	for(var m in list)
+	{
+		var movie = list[m];
+	
+		document.write("<h2>" + movie.movie_title + " Rating "+movie.rating +  "</h2>");
+	
+		document.write("<ol>");
+		var dates = movie.orderedDates();
+		for(i = 0; i<dates.length; i++)
+		{
+			var d = dates[i];
+			var times = movie.showing_dates[d.toString()];
+			document.write("<li>"+d.getDate()+"/"+(1+d.getMonth())+"/"+d.getFullYear()+" @ "+times+"</li>");
+		
+		}
+			document.write("</ol>");
+	}
+
+}
+
+</script>
+
+<h1>Listings</h1>
+
+<script>showListings()</script>
+
+
+<h1>Movies</h1>
+
+<script>showMovies()</script>
+
+</body>
+</html>

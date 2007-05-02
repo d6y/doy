@@ -283,9 +283,14 @@ function addEntriesToContents(contents, entries)
 	for(var title in entries)
 	{
 	    var movie = entries[title];
-		even = !even;
-		contents.appendChild ( createRow(entries[title],even) );
-		count++;
+	
+		var dates = movie.orderedDates();
+		if (dates && dates.length > 0)
+		{
+			even = !even;
+			contents.appendChild ( createRow(entries[title],even) );
+			count++;
+		}
 	}
 	
 	return count;
@@ -306,12 +311,6 @@ function createRow (movie, even)
 	articlehead.setAttribute('class', 'articlehead');
 	articlehead.href = movie.info_url;
 	articlehead.onclick = function() { widget.openURL(this.href); return false; };
-
-	//if (link != null) {
-	//	articlehead.setAttribute('the_link', link);
-//		articlehead.setAttribute('onclick', 'clickOnTitle(event, this);');
-	//	articlehead.setAttribute('href', '#');
-//	}
 	
 	var subject_div = document.createElement('div');
 	subject_div.setAttribute('class', 'subject');
@@ -355,56 +354,6 @@ function formatDate(d)
 	return dayName[d.getDay()] + " " + d.getDate() + " " + monthName[d.getMonth()];
 }
 
-
-function createDateStr (date)
-{
-	var month;
-	switch (date.getMonth()) {
-		case 0: month = 'Jan'; break;
-		case 1: month = 'Feb'; break;
-		case 2: month = 'Mar'; break;
-		case 3: month = 'Apr'; break;
-		case 4: month = 'May'; break;
-		case 5: month = 'Jun'; break;
-		case 6: month = 'Jul'; break;
-		case 7: month = 'Aug'; break;
-		case 8: month = 'Sep'; break;
-		case 9: month = 'Oct'; break;
-		case 10: month = 'Nov'; break;
-		case 11: month = 'Dec'; break;
-	}	
-	return month + ' ' + date.getDate();
-}
-
-// Open in the browser instead of in the widget
-function clickOnLink()
-{
-	if (window.widget) {
-		widget.openURL(this.href);
-		return false;
-	}
-}
-
-function clickOnTitle(event, div)
-{
-	if (window.widget) {
-		widget.openURL(div.the_link);
-	}
-}
-
-
-
-
-function scaleArticles( value )
-{
-    var content = document.getElementById('content');
-    content.style.appleLineClamp = value + "%";
-}
-
-function endScale()
-{
-	//scrollArea.refresh();
-}
 
 
 
