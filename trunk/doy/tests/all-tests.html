@@ -1,0 +1,82 @@
+<head>
+  <title>All Unit Tests - Run in Safari only</title>
+  <script type="text/javascript" src="lib/Test/Builder.js"></script>
+  <script type="text/javascript" src="lib/Test/Simple.js"></script>
+  <script type="text/javascript" src="../doy.wdgtproj/project.wdgt/Listing.js"></script>
+  <script type="text/javascript" src="../doy.wdgtproj/project.wdgt/Cinema.js"></script>
+  <script type="text/javascript" src="../doy.wdgtproj/project.wdgt/Movie.js"></script>
+  <script type="text/javascript" src="../doy.wdgtproj/project.wdgt/ListingsParser.js"></script>
+  </head>
+  <body>
+    <pre id="test">
+      <script type="text/javascript">
+
+plan({tests: 21});
+
+// -----------------------------------------------------------------------------------------
+// Movie object tests...
+
+var today = new Date(2007, 0, 1);
+
+var movie = new Movie("When Code Goes Bad", "18", "url goes here");
+movie.addShowing( today, "11:00 AM" );
+movie.addShowing( today, "9:30 PM" );
+
+ok(1 == movie.orderedDates().length, "Movie sanity check");
+ok(2 == movie.showingsOn(today).length, "Showing sanity check");
+
+// If it's 9PM now, we should only have one showing left:
+var now = new Date(2007, 0, 1, 21, 0, 0);
+movie.trimTo(now);
+
+ok(1 == movie.orderedDates().length, "Expected one date after trim");
+	
+var showings = movie.showingsOn(today);
+ok(1 == showings.length, "number of showings on 2007/01/01");
+ok("9:30 PM" == showings[0], "remaining listing should be at 9:30");
+
+
+// -----------------------------------------------------------------------------------------
+// PARSING TESTS...
+
+var html = sampleData();
+var parser = new ListingsParser();
+var list = parser.findAll(html);
+
+// Make sure we have the right number of listings:
+ok(217 == list.length, "number of listing");
+
+// Check the first two...
+ok("Days of Glory" ==  list[0].movie_title,  "1st title");
+ok( list[0].rating == "12A", "first rating");
+ok( new Date(2007,3,11).toString() == list[0].showing_date.toString(), "1st date");
+ok( "2:00 PM" ==list[0].showing_time, "first time" );
+ok("/cinema_home_date.aspx?eventId=0wq4ho%40doyb" ==  list[0].info_url, "first url");
+
+ok("Days of Glory" ==  list[1].movie_title, "2nd title");
+ok("12A" ==  list[1].rating, "2nd rating");
+ok( new Date(2007,3,11).toString() ==  list[1].showing_date.toString(), "2nd date");
+ok("6:30 PM" ==  list[1].showing_time, "2nd time");
+ok( "/cinema_home_date.aspx?eventId=0wq4ho%40doyb" ==  list[1].info_url, "2nd url");
+
+// Check the last one:
+ok("Zodiac" == list[216].movie_title, "last title");
+ok("15" == list[216].rating, "last rating");
+ok( new Date(2007,4, 31).toString() == list[216].showing_date.toString(), "last date");
+ok( "9:00 PM" == list[216].showing_time, "last time");
+ok("/cinema_home_date.aspx?eventId=g7spo1%40doyb" == list[216].info_url, "last URL");
+
+
+function sampleData()
+{
+	var oXML=new XMLHttpRequest();
+	oXML.open("GET","http://doy.googlecode.com/svn/trunk/doy/tests/listing.html", false);
+	oXML.send(null);
+	sRes=oXML.responseText;
+	return sRes;
+}
+
+</script>
+</pre>
+</body>
+</html>
